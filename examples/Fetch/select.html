@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+		<style>
+		.datatable input {
+			-moz-border-bottom-colors: none;
+			-moz-border-left-colors: none;
+			-moz-border-right-colors: none;
+			-moz-border-top-colors: none;
+			border-color: #aaa;
+			border-image: none;
+			border-style: none none solid;
+			font-size: 16px;
+			margin: 20px 0;
+			padding: 10px;
+			width: 100%;
+		}
+		</style>
+	</head>
+    <body> 
+        <div ng-app="getApp" ng-controller="getCtrl"> 
+			<div class="col-md-4 col-md-offset-4 datatable">
+				<input type="text" ng-model="sort" placeholder="Search"/>	
+				<table class="table table-bordered">
+					<tr>
+						<th ng-click="orderByMe('name')">First Name</th>
+						<th ng-click="orderByMe('city')">Last Name</th>
+						<th ng-click="orderByMe('city')">Email</th>
+						<th ng-click="orderByMe('city')">Message</th>
+					</tr>
+					<tr ng-repeat="x in names | filter:sort | orderBy:myOrderBy">
+						<td>{{x.firstname}}</td>
+						<td>{{x.lastname}}</td>
+						<td>{{x.email}}</td>
+						<td>{{x.message}}</td>
+					</tr>
+				</table>
+			</div> 
+        </div>
+        
+        <script>
+        var app = angular.module('getApp', []);
+        app.controller('getCtrl', function($scope, $http) {
+          $http.get("http://localhost/Angular/New/fetched.php")
+          .then(function(response) {
+              $scope.names = response.data.profile;
+          });
+        });
+        </script>
+    
+    </body>
+</html>
