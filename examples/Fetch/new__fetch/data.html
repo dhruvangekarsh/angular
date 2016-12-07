@@ -19,6 +19,16 @@
 					<td>{{x.contact}}</td>
 				</tr>
 			</table>
+
+			<ul ng-repeat="xyz in names">
+				<li>
+					<ul ng-repeat="(key,val) in xyz">
+						<li>{{key}} - {{val}}</li>
+					</ul> 
+				</li>
+			</ul>
+
+
 			
         </div>
         
